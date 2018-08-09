@@ -29,14 +29,14 @@ Para montar a casa, foi utilizado o Unity 3D, que se apresenta como um Game Engi
 Para deixar qualquer asset ter a capacidade de deixar ver possiveis objetos por trás deles, foi criado um shader (Shaders são pequenos scripts que contêm os cálculos matemáticos e algoritmos para calcular a cor de cada pixel renderizado, com base na entrada de iluminação e na configuração do Material) específico chamado `Diffuse-Stencil-Write.shader`.
 
 ```swift
-Tags { "RenderType" = "Opaque" } LOD 200          Stencil         {             Ref 1             Comp Always             Pass Replace             ZFail Keep         } 
-Tags { "RenderType" = "Opaque" }
-LOD 200     
+Tags { "RenderType" = "Opaque" }
+LOD 200
+    
 Stencil {
-  Ref 1
-  Comp Always
-  Pass Replace
-  ZFail Keep
+    Ref 1
+    Comp Always
+    Pass Replace
+    ZFail Keep
 } 
 
 ```
@@ -45,26 +45,22 @@ Este trecho de código é o mais crucial do script, basicamente estou dizendo qu
 Para deixar qualquer asset ter a aparencia de raio-x, foi criado um shader específico chamado `ColoredOutline.shader`.
 
 ```swift
-Stencil         {             Ref 0             Comp NotEqual         }          Tags         {             "Queue" = "Transparent"             "RenderType" = "Transparent"             "XRay" = "ColoredOutline"         }          ZWrite Off         ZTest Always         Blend One One 
-```
-
-Este trecho de código é o mais crucial do script, o stencil está usando o valor '0' para comparação e o comp como NotEqual, indica que só irá renderizar os pixels, cujo o valor de referencia seja diferente do valor que está no buffer. Usando a tag queue eu estou dizendo que qualquer shader Transparente garante que eles sejam desenhados após todos os objetos opacos e assim por diante, o = transparent significa que essa fila de renderização é renderizada após qualquer objeto geométrico. O renderType = transparent fala que o que será renderizado, será semitransparente. O ZWrite controla se os pixels deste objeto são gravados no buffer de profundidade. Para objetos sólidos o correto é deixar ativado (On), se estiver desenhando efeitos semitransparentes o correto é deixar desativado (Off). O ZTest Always indica que o teste de profundidade sempre deve ser feito. Blending é usado para fazer objetos transparentes, o comando blend controla como eles são combinados com o que já está la. 
-
 Stencil {
-  Ref 0
-  Comp NotEqual
+    Ref 0
+    Comp NotEqual
 }
 
 Tags {
-  "Queue" = "Transparent"
-  "RenderType" = "Transparent"
-  "XRay" = "ColoredOutline"
+    "Queue" = "Transparent"
+    "RenderType" = "Transparent"
+    "XRay" = "ColoredOutline"
 }
 
 ZWrite Off
 ZTest Always
 Blend One One 
 ```
+
 
 Este trecho de código é o mais crucial do script, o stencil está usando o valor '0' para comparação e o comp como NotEqual, indica que só irá renderizar os pixels, cujo o valor de referencia seja diferente do valor que está no buffer. Usando a tag queue eu estou dizendo que qualquer shader Transparente garante que eles sejam desenhados após todos os objetos opacos e assim por diante, o = transparent significa que essa fila de renderização é renderizada após qualquer objeto geométrico. O renderType = transparent fala que o que será renderizado, será semitransparente. O ZWrite controla se os pixels deste objeto são gravados no buffer de profundidade. Para objetos sólidos o correto é deixar ativado (On), se estiver desenhando efeitos semitransparentes o correto é deixar desativado (Off). O ZTest Always indica que o teste de profundidade sempre deve ser feito. Blending é usado para fazer objetos transparentes, o comando blend controla como eles são combinados com o que já está la. 
  
