@@ -5,7 +5,7 @@
 
 ## Introdução
 
-Neste artigo vamos ver como Realidade Aumentada funciona e mostrar como foi aplicada em um projeto de uma casa de verdade. Com o aplicativo Pipe Maps aberto, podemos andar pela casa e apontar a câmera para onde desejamos, visualizando assim, através do Iphone, os encanamentos e conduites instalados na casa.
+Neste artigo vamos ver como Realidade Aumentada funciona e mostrar como foi aplicada em um projeto de uma casa de verdade, utilizando o ARKit da Apple. Com o aplicativo Pipe Maps aberto, podemos andar pela casa e apontar a câmera para onde desejamos, visualizando assim, através do Iphone, os encanamentos e conduites instalados na casa.
 
 ## O que é Mapa de Encanamentos?
 
@@ -86,3 +86,6 @@ Neste video temos uma demo do aplicativo usado no quarto da casa.
 </p>
 
 ## Conclusão
+
+Com o uso do AR, deu para se ter uma ideia das infinitas possibilidades de aplicações que podem usar essa tecnologia, creio que Realidade aumentada está entre as tecnologias que vão impactar o mundo em um futuro próximo, tecnologias estas como, Internet das coisas, Realidade virtual, Big Data, Carros autônomos entre outras.
+Como é uma tecnologia praticamente recente, ela possui algumas limitações, como por exemplo, se movimentar rapidamente o Iphone (não precisa ser muito rapido), a aplicação "se perde" e as posições dos objetos ficam bagunçadas.
