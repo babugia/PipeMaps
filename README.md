@@ -30,6 +30,14 @@ Para deixar qualquer asset ter a capacidade de deixar ver possiveis objetos por 
 
 ```swift
 Tags { "RenderType" = "Opaque" } LOD 200          Stencil         {             Ref 1             Comp Always             Pass Replace             ZFail Keep         } 
+Tags { "RenderType" = "Opaque" }
+LOD 200     
+Stencil {
+  Ref 1
+  Comp Always
+  Pass Replace
+  ZFail Keep
+} 
 
 ```
 Este trecho de código é o mais crucial do script, basicamente estou dizendo que este shader poderá ser substituido, o LOD 200 indica que o shader se propaga em todas direções do objeto, LOD (Level Of Detail) significa nível de detalhe. Stencil é um buffer que é usado como finalidade geral para salvar ou descartar pixels, dentro dele estou usando o valor '1' para comparação, dizendo que sempre vou comparar, e que se o teste de stencil passar, eu vou substituir, por ultimo, estou dizendo que se mesmo que o teste de stencil passar e o teste de profundidade falhar, eu vou manter o valor.
@@ -42,6 +50,24 @@ Stencil         {             Ref 0         �
 
 Este trecho de código é o mais crucial do script, o stencil está usando o valor '0' para comparação e o comp como NotEqual, indica que só irá renderizar os pixels, cujo o valor de referencia seja diferente do valor que está no buffer. Usando a tag queue eu estou dizendo que qualquer shader Transparente garante que eles sejam desenhados após todos os objetos opacos e assim por diante, o = transparent significa que essa fila de renderização é renderizada após qualquer objeto geométrico. O renderType = transparent fala que o que será renderizado, será semitransparente. O ZWrite controla se os pixels deste objeto são gravados no buffer de profundidade. Para objetos sólidos o correto é deixar ativado (On), se estiver desenhando efeitos semitransparentes o correto é deixar desativado (Off). O ZTest Always indica que o teste de profundidade sempre deve ser feito. Blending é usado para fazer objetos transparentes, o comando blend controla como eles são combinados com o que já está la. 
 
+Stencil {
+  Ref 0
+  Comp NotEqual
+}
+
+Tags {
+  "Queue" = "Transparent"
+  "RenderType" = "Transparent"
+  "XRay" = "ColoredOutline"
+}
+
+ZWrite Off
+ZTest Always
+Blend One One 
+```
+
+Este trecho de código é o mais crucial do script, o stencil está usando o valor '0' para comparação e o comp como NotEqual, indica que só irá renderizar os pixels, cujo o valor de referencia seja diferente do valor que está no buffer. Usando a tag queue eu estou dizendo que qualquer shader Transparente garante que eles sejam desenhados após todos os objetos opacos e assim por diante, o = transparent significa que essa fila de renderização é renderizada após qualquer objeto geométrico. O renderType = transparent fala que o que será renderizado, será semitransparente. O ZWrite controla se os pixels deste objeto são gravados no buffer de profundidade. Para objetos sólidos o correto é deixar ativado (On), se estiver desenhando efeitos semitransparentes o correto é deixar desativado (Off). O ZTest Always indica que o teste de profundidade sempre deve ser feito. Blending é usado para fazer objetos transparentes, o comando blend controla como eles são combinados com o que já está la. 
+ 
 ##### *Resumindo..*
 
 O Diffuse-Stencil-Write.shader, que é o shader dos objetos que poderei enxergar os encanamentos e conduites por trás deles, fala que o shader pode ser substituido e o seu “valor” é 1, e o ColoredOutline.shader que é o shander dos encanamentos e conduites para ficarem com efeito raio-x, fala que vou renderizar com efeito semitransparente e que será renderizado após todos os outros objetos “normais” serem renderizados e seu valor é 0, então quando a câmera apontar pra uma parede por exemplo, seu valor de shader é 1, se tiver um objeto com efeito raio-x atrás dela, dará para enxergar pois seu valor de shader é 0, então substituirei o shader padrão da parede, pelo do objeto (encanamento ou conduite), ficando visivel através do aplicativo.
@@ -51,16 +77,22 @@ O Diffuse-Stencil-Write.shader, que é o shader dos objetos que poderei enxergar
 Neste video temos uma demo do aplicativo usado na cozinha da casa.
 <p>
 <img src=./media/kitchen_together.mp4 width="60%" height="auto">
+    <img src=./media/kitchen_together.mp4 width="60%" height="auto">
+>>>>>>> 
 </p>
 
 Neste video temos uma demo do aplicativo usado no banheiro da casa.
 <p>
 <img src=./media/bathroom_together.mp4 width="60%" height="auto">
+=======
+    <img src=./media/bathroom_together.mp4 width="60%" height="auto">
 </p>
 
 Neste video temos uma demo do aplicativo usado no quarto da casa.
 <p>
 <img src=./media/badroom_together.mp4 width="60%" height="auto">
+======
+    <img src=./media/badroom_together.mp4 width="60%" height="auto">
 </p>
 
 ## Conclusão
