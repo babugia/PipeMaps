@@ -64,7 +64,7 @@ Blend One One
 
 Este trecho de código é o mais crucial do script, o stencil está usando o valor '0' para comparação e o comp como NotEqual, indica que só irá renderizar os pixels, cujo o valor de referencia seja diferente do valor que está no buffer. Usando a tag queue eu estou dizendo que qualquer shader Transparente garante que eles sejam desenhados após todos os objetos opacos e assim por diante, o = transparent significa que essa fila de renderização é renderizada após qualquer objeto geométrico. O renderType = transparent fala que o que será renderizado, será semitransparente. O ZWrite controla se os pixels deste objeto são gravados no buffer de profundidade. Para objetos sólidos o correto é deixar ativado (On), se estiver desenhando efeitos semitransparentes o correto é deixar desativado (Off). O ZTest Always indica que o teste de profundidade sempre deve ser feito. Blending é usado para fazer objetos transparentes, o comando blend controla como eles são combinados com o que já está la. 
  
-##### *Resumindo..*
+#### *Resumindo..*
 
 O Diffuse-Stencil-Write.shader, que é o shader dos objetos que poderei enxergar os encanamentos e conduites por trás deles, fala que o shader pode ser substituido e o seu “valor” é 1, e o ColoredOutline.shader que é o shander dos encanamentos e conduites para ficarem com efeito raio-x, fala que vou renderizar com efeito semitransparente e que será renderizado após todos os outros objetos “normais” serem renderizados e seu valor é 0, então quando a câmera apontar pra uma parede por exemplo, seu valor de shader é 1, se tiver um objeto com efeito raio-x atrás dela, dará para enxergar pois seu valor de shader é 0, então substituirei o shader padrão da parede, pelo do objeto (encanamento ou conduite), ficando visivel através do aplicativo.
 
@@ -72,20 +72,21 @@ O Diffuse-Stencil-Write.shader, que é o shader dos objetos que poderei enxergar
 
 Neste video temos uma demo do aplicativo usado na cozinha da casa.
 <p>
-    <img src=./media/kitchen_together.gif width="600px" height="338px">
+    <img src=./media/kitchen.gif width="600px" height="338px">
 </p>
 
 Neste video temos uma demo do aplicativo usado no banheiro da casa.
 <p>
-    <img src=./media/bathroom_together.gif width="600px" height="338px">
+    <img src=./media/bathroom.gif width="600px" height="338px">
 </p>
 
 Neste video temos uma demo do aplicativo usado no quarto da casa.
 <p>
-    <img src=./media/badroom_together.gif width="600px" height="338px">
+    <img src=./media/badroom.gif width="600px" height="338px">
 </p>
 
 ## Conclusão
 
 Com o uso do AR, deu para se ter uma ideia das infinitas possibilidades de aplicações que podem usar essa tecnologia, creio que Realidade aumentada está entre as tecnologias que vão impactar o mundo em um futuro próximo, tecnologias estas como, Internet das coisas, Realidade virtual, Big Data, Carros autônomos entre outras.
-Como é uma tecnologia praticamente recente, ela possui algumas limitações, como por exemplo, se movimentar rapidamente o Iphone (não precisa ser muito rapido), a aplicação "se perde" e as posições dos objetos ficam bagunçadas.
+Como é uma tecnologia praticamente recente, ela possui algumas limitações, como por exemplo, se movimentar rapidamente o Iphone (não precisa ser muito rapido), a aplicação "se perde" e as posições dos objetos ficam bagunçadas, o mesmo se passar alguém na frente da câmera. 
+Uma idéia relativamente simples, como poder saber onde estão instalados o encanamento e conduites da sua casa, sem precisar procurar a planta do imóvel, ter o trabalho de achar, no meio de tantas informações, onde passa algum cano na sua parede, pra poder pregar algum prego para pendurar algo, simplesmente abrindo um aplicativo no seu celular. É um exemplo de aplicação útil e que no final das contas, fará com que o usuario não perca tanto tempo procurando um documento, que provavelmente não lembra onde está guardado.
