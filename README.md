@@ -82,7 +82,7 @@ Neste video temos uma demo do aplicativo usado no banheiro da casa.
 
 Neste video temos uma demo do aplicativo usado no quarto da casa.
 <p>
-    <img src=./media/badroom.gif width="600px" height="338px">
+    <img src=./media/bedroom.gif width="600px" height="338px">
 </p>
 
 ## Conclusão
