@@ -77,7 +77,7 @@ Neste video temos uma demo do aplicativo usado na cozinha da casa.
 
 Neste video temos uma demo do aplicativo usado no banheiro da casa.
 <p>
-    <img src=./media/bathroom.gif width="600px" height="338px">
+    <img src=./media/bathroom_together.gif width="600px" height="338px">
     
 </p>
 
