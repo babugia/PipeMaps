@@ -72,7 +72,7 @@ O Diffuse-Stencil-Write.shader, que é o shader dos objetos que poderei enxergar
 
 Neste video temos uma demo do aplicativo usado na cozinha da casa.
 <p>
-    <img src=./media/kitchen.gif width="600px" height="338px">
+    <img src=./media/kitchen2.gif width="600px" height="338px">
 </p>
 
 Neste video temos uma demo do aplicativo usado no banheiro da casa.
