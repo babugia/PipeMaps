@@ -9,7 +9,7 @@ Neste artigo vamos ver como Realidade Aumentada funciona e mostrar como foi apli
 
 ## O que é Mapa de Encanamentos?
 
-Também chamado de planta hidráulica, o mapa de encanamentos se encontra na planta do imóvel e ele mostra o conjunto de ramificações do encanamento e os lugares por onde passam estes canos, com tamanhos e outros detalhes. Neste mapa de encanamentos também foi considerado conduites responsaveis pela distribuição de eletricidade.
+Também chamado de planta hidráulica, o mapa de encanamentos se encontra na planta do imóvel e ele mostra o conjunto de ramificações do encanamento e os lugares por onde passam estes canos, com tamanhos e outros detalhes. Neste mapa de encanamentos também foi considerado conduites responsáveis pela distribuição de eletricidade.
 
 ## O que é Realidade Aumentada?
 A realidade aumentada é um elemento das novas tecnologias que dispõe de uma visão diferente da realidade, usa seu ambiente natural existente e simplesmente sobrepõe informações virtuais sobre ele a partir da câmera de um dispositivo, de modo que esses elementos parecem habitar a realidade, nada mais é que a ilusão que o conteúdo virtual faz parte do mundo real.
@@ -26,7 +26,7 @@ Para garantir que os objetos virtuais continuem com a aparência que estão no m
 Para montar a casa, foi utilizado o Unity 3D, que se apresenta como um Game Engine (motor de jogo). Foi utilizado vários assets (representação de qualquer item que possa ser usado no projeto), por exemplo, porta, sofa, geladeira, etc. Assim foi sendo construida a casa virtual, baseando-se na casa real. Uma das dificuldades do projeto, foi a “real” posição e tamanho dos objetos encontrados dentro da casa, desde objetos grandes como geladeira, sofa, até objetos pequenos, como talheres e interruptores, a construção virtual da casa tem que ser bem parecido com a realidade, pois quando o usuário abre o aplicativo, tem que sentir realmente que está dentro da casa, tanto no espaço real, quando no espaço virtual. Como o ARKit faz o trabalho pesado, tirando o trabalho do desenvolvedor lidar com câmeras, calculos e qualquer configuração sobre AR, o maior trabalho, além de ajustar a casa e seus objetos (tamanho e posição), foi fazer com que os encanamentos e conduites fossem visto como uma visão de “raio-x” e paredes e outros assets, como pias, tivessem a capacidade de deixar enxergar, por trás deles, os canos e conduites em modo raio-x.
 
 ## Criando o modo “raio-x”
-Para deixar qualquer asset ter a capacidade de deixar ver possiveis objetos por trás deles, foi criado um shader (Shaders são pequenos scripts que contêm os cálculos matemáticos e algoritmos para calcular a cor de cada pixel renderizado, com base na entrada de iluminação e na configuração do Material) específico chamado `Diffuse-Stencil-Write.shader`.
+Para permitir qualquer asset ter a capacidade de deixar ver possiveis objetos por trás deles, foi criado um shader (Shaders são pequenos scripts que contêm os cálculos matemáticos e algoritmos para calcular a cor de cada pixel renderizado, com base na entrada de iluminação e na configuração do Material) específico chamado `Diffuse-Stencil-Write.shader`.
 
 ```swift
 Tags { "RenderType" = "Opaque" }
@@ -62,22 +62,22 @@ Blend One One
 ```
 
 
-Este trecho de código é o mais crucial do script, o stencil está usando o valor '0' para comparação e o comp como NotEqual, indica que só irá renderizar os pixels, cujo o valor de referencia seja diferente do valor que está no buffer. Usando a tag queue eu estou dizendo que qualquer shader Transparente garante que eles sejam desenhados após todos os objetos opacos e assim por diante, o = transparent significa que essa fila de renderização é renderizada após qualquer objeto geométrico. O renderType = transparent fala que o que será renderizado, será semitransparente. O ZWrite controla se os pixels deste objeto são gravados no buffer de profundidade. Para objetos sólidos o correto é deixar ativado (On), se estiver desenhando efeitos semitransparentes o correto é deixar desativado (Off). O ZTest Always indica que o teste de profundidade sempre deve ser feito. Blending é usado para fazer objetos transparentes, o comando blend controla como eles são combinados com o que já está la. 
+Este trecho de código é o mais crucial do script, o stencil está usando o valor '0' para comparação e o comp como NotEqual, indica que só irá renderizar os pixels, cujo o valor de referência seja diferente do valor que está no buffer. Usando a tag queue eu estou dizendo que qualquer shader Transparente garante que eles sejam desenhados após todos os objetos opacos e assim por diante, o "= transparent" significa que essa fila de renderização é renderizada após qualquer objeto geométrico. O "renderType = transparent" fala que o que será renderizado, será semitransparente. O ZWrite controla se os pixels deste objeto são gravados no buffer de profundidade. Para objetos sólidos o correto é deixar ativado (On), se estiver desenhando efeitos semitransparentes o correto é deixar desativado (Off). O ZTest Always indica que o teste de profundidade sempre deve ser feito. Blending é usado para fazer objetos transparentes, o comando blend controla como eles são combinados com o que já está la. 
  
 #### *Resumindo..*
 
-O Diffuse-Stencil-Write.shader, que é o shader dos objetos que poderei enxergar os encanamentos e conduites por trás deles, fala que o shader pode ser substituido e o seu “valor” é 1, e o ColoredOutline.shader que é o shander dos encanamentos e conduites para ficarem com efeito raio-x, fala que vou renderizar com efeito semitransparente e que será renderizado após todos os outros objetos “normais” serem renderizados e seu valor é 0, então quando a câmera apontar pra uma parede por exemplo, seu valor de shader é 1, se tiver um objeto com efeito raio-x atrás dela, dará para enxergar pois seu valor de shader é 0, então substituirei o shader padrão da parede, pelo do objeto (encanamento ou conduite), ficando visivel através do aplicativo.
+O Diffuse-Stencil-Write.shader, que é o shader dos objetos que poderei enxergar os encanamentos e conduites por trás deles, fala que o shader pode ser substituido e o seu “valor” é 1, e o ColoredOutline.shader que é o shader dos encanamentos e conduites para ficarem com efeito raio-x, fala que vou renderizar com efeito semitransparente e que será renderizado após todos os outros objetos “normais” serem renderizados e seu valor é 0, então quando a câmera apontar pra uma parede, por exemplo, seu valor de shader é 1, se tiver um objeto com efeito raio-x atrás dela, dará para enxergar pois seu valor de shader é 0, então substituirei o shader padrão da parede, pelo do objeto (encanamento ou conduite), ficando visivel através do aplicativo.
 
 ## Demonstração
 
 Neste video temos uma demo do aplicativo usado na cozinha da casa.
 <p>
-    <img src=./media/kitchen2.gif width="600px" height="338px">
+    <img src=./media/kitchen.gif width="600px" height="338px">
 </p>
 
 Neste video temos uma demo do aplicativo usado no banheiro da casa.
 <p>
-    <img src=./media/bathroom2.gif width="600px" height="338px">
+    <img src=./media/bathroom.gif width="600px" height="338px">
     
 </p>
 
