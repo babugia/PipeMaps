@@ -23,7 +23,7 @@ O ARKit tem a capacidade de criar e rastrear uma correspondência entre o espaç
 
 ### Como funciona?
 
-Para criar tal correspondência, o ARKit usa uma tecnologia chamada visual-inertial odometry (VIO) para rastrear com precisão e em tempo real a posição no mundo ao redor, aproveitando dos dados do sensor da câmera com informações do CoreMotion. Permitindo assim que o dispositivo perceba como ele se move com alta precisão e sem necessidade de calibração.
+O ARKit usa uma tecnologia chamada visual-inertial odometry (VIO) para rastrear com precisão e em tempo real a posição no mundo ao redor, aproveitando dos dados do sensor da câmera com informações do CoreMotion. Permitindo assim que o dispositivo perceba como ele se move com alta precisão e sem necessidade de calibração.
 Para garantir que os objetos virtuais continuem com a aparência que estão no mundo real, a posição do celular é recalculada entre cada frame que é recarregado e mostrado na tela do dispositivo, isso ocorre cerca de trinta ou mais vezes por segundo. A posição é rastreada através do sistema visual (câmera), combinando um ponto no mundo real com um pixel no sensor da câmera de cada quadro. Além disso, a posição também é rastreada pelo sistema inertial (acelerômetro e giroscópio usados em conjunto, os quais são denominados Unidade de Medição Inercial ou IMU). Após tudo isso, a posição atualizada é mostrada através do SDK ARKit. Assim como o odômetro do carro determina a distância do carro percorreu, o sistema VIO rastreia a distância que seu iPhone percorreu no espaço 6D. 6D significa 3D de movimento xyz (translação), além de 3D de roll / pitch / yaw (rotação).
 
 
